@@ -5,14 +5,10 @@ nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('punkt_tab')  # Add this line to avoid missing resource
 
-
 import streamlit as st
-import pandas as pd
 from collections import Counter
 import string
 from deep_translator import GoogleTranslator
-
-
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
@@ -36,15 +32,21 @@ def process_titles(titles):
 # Streamlit app layout
 st.title('Data Processing and Translation App')
 
-uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
-if uploaded_file is not None:
-    data = pd.read_csv(uploaded_file)
-    titles = data.iloc[:, 0].dropna().tolist()  # Assuming the titles are in the first column
+# Text box to input titles
+titles_input = st.text_area("Paste your titles here (CSV format)", height=200)
+
+if titles_input:
+    # Split the pasted input by newlines (simulating CSV rows)
+    titles = [line.strip() for line in titles_input.split("\n") if line.strip()]
+
+    # Process titles
     translations = process_titles(titles)
-    
+
+    # Create a DataFrame for the top 1000 words
     top_1000_df = pd.DataFrame(translations, columns=['Word', 'Translation', 'Frequency'])
     st.write(top_1000_df)
     
+    # Provide the option to download the processed data as CSV
     csv = top_1000_df.to_csv(index=False).encode('utf-8')
     st.download_button(
         label="Download data as CSV",

@@ -1,19 +1,17 @@
 import nltk
 
-# Ensure the necessary NLTK data is downloaded
+# Ensure required resources are downloaded
 nltk.download('punkt')
 nltk.download('stopwords')
+nltk.download('punkt_tab')  # Add this line to avoid missing resource
+
 
 import streamlit as st
-import nltk
 import pandas as pd
 from collections import Counter
 import string
 from deep_translator import GoogleTranslator
 
-# Download necessary NLTK data
-nltk.download('punkt')
-nltk.download('stopwords')
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize

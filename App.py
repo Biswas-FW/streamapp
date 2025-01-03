@@ -1,3 +1,9 @@
+import nltk
+
+# Ensure the necessary NLTK data is downloaded
+nltk.download('punkt')
+nltk.download('stopwords')
+
 import streamlit as st
 import nltk
 import pandas as pd

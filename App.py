@@ -1,4 +1,5 @@
 import nltk
+import pandas as pd
 
 # Ensure required resources are downloaded
 nltk.download('punkt')
